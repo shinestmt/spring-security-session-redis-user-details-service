@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 /**
  * 安全配置文件，主要是重写默认的认证方式和访问目录权限
@@ -32,8 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth)
 			throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource)
-				.passwordEncoder(new BCryptPasswordEncoder(10));
+//		auth.jdbcAuthentication().dataSource(dataSource)
+//				.passwordEncoder(new BCryptPasswordEncoder(10));
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance());
 
 	}
 
